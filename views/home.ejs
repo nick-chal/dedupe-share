@@ -1,0 +1,32 @@
+<% include ./header.ejs%>
+<div class="firstnick">
+    <div class="container">
+        <header class="jumbotron">
+            <div class="conatiner">
+                <h1>Welcome to our file sharing site</h1>
+                <p>Browse as many files as you can and also share with everyone</p>
+                <p>
+                    <a href="/upload" class="btn btn-primary btn-large">Upload new files</a>
+                </p>
+            </div>
+        </header>
+
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <%if(logged) {%>
+                <% files.forEach(function (file) {%>
+                    <% if(file.user.username == currentUser.username){%>
+                    <div class="col-md-3 col-sm-6">
+                        <a href="/files/<%= file._id %>">
+                            <div class="thumbnail">
+                                <h4><%= file.filename%></h4>
+                                <p class="username"><i>by</i> <%= file.user.username%></p>
+                            </div>
+                        </a>
+                    </div>
+                    <%}%>
+                <% }); %>
+            <%}%>
+        </div>
+    </div>
+</div>
+
