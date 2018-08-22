@@ -1,18 +1,115 @@
-<% include ./header.ejs%>
-
-<div class="firstnick">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DeDupe | Sign Up</title>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="home">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <div class="container">
-        <div class="row">
-            <h1 class="newH1">Sign Up</h1>
-            <div class="inForm">
-                <form action="/register" method="post">
-                    <div class="form-group"><input REQUIRED class="form-control" type="text" placeholder="username" name ="username"> </div>
-                    <div class="form-group"><input REQUIRED class="form-control" type="password" placeholder="password" name="password"> </div>
-                    <div class="form-group"><button class="btn btn-lg btn-primary btn-block">Submit!</button></div>
-                </form>
-            </div>
-        </div>
+      <a href="/" class="navbar-brand">DeDupe</a>
+      <div class="d-none d-md-block">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link active">Home</a>
+          </li>
 
+          <li class="nav-item">
+            <a href="/login" class="nav-link"><i class="fa fa-user-circle"></i> Sign in</a>
+          </li>
+
+        </ul>
+      </div>
     </div>
+  </nav>
 
-</div>
+
+
+  <!-- Login -->
+  <section id="login">
+    <div class="container">
+      <div class="firstnick">
+          <% if(error && error.length>0 ){%>
+        <div class="alert alert-danger" role="alert">
+            <%= error%>
+        </div>
+          <%}else if(success && success.length>0){%>
+        <div class="alert alert-success" role="alert">
+            <%= success%>
+        </div>
+          <%}%>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card text-dark my-3">
+            <div class="card-header">
+              <h4>Account Sign Up</h4>
+            </div>
+            <div class="card-body">
+              <form action="/register" method="post">
+                <div class="form-group">
+                  <label for="email">Username</label>
+                  <input maxlength="20" type="text" class="form-control" placeholder="Username" name="username" pattern="[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" oninvalid="this.setCustomValidity('Username can contain letters, numbers and only one of (. _ - ) in between')" oninput="this.setCustomValidity('')">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input maxlength="20" type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPassword" >
+                </div>
+                <button class="btn btn-primary btn-block">Login</button>
+
+                <!-- <a href="home.html"class="btn btn-primary btn-block">Login</a> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Footer  -->
+  
+  <!--<footer id ="main-footer" class="bg-light">-->
+    <!--<div class="container">-->
+      <!--<div class="row">-->
+        <!--<div class="col text-center text-muted">-->
+          <!--<div class="py-4">-->
+            <!--<h1 class="h3">DeDupe</h1>-->
+            <!--&lt;!&ndash;<p>Copyright &copy; 2018</p>&ndash;&gt;-->
+          <!--&lt;!&ndash; <div class="d-flex flex-row justify-content-center">-->
+            <!--<div class="p-4">-->
+              <!--<a href=""><i class="fa fa-facebook"></i></a>-->
+            <!--</div>-->
+            <!--<div class="p-4">-->
+              <!--<a href=""><i class="fa fa-twitter"></i></a>-->
+
+            <!--</div>-->
+            <!--<div class="p-4">-->
+              <!--<a href=""><i class="fa fa-instagram"></i></a>-->
+
+            <!--</div>-->
+          <!--</div>-->
+          <!--<button type="button"class="btn btn-primary" data-toggle="modal" data-target="#contactModal" name="button">Contact Us</button> &ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+<!--</footer>-->
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/navbar-fixed.js"></script>
+
+</body>
+</html>

@@ -8,7 +8,11 @@ var fileSchema = new mongoose.Schema({
             ref: "Users"
         },
         username: String
-    }
+    },
+   date: { type: String},
+    hashArray : [String],
+    size: Number,
+   description: String
 });
 
 module.exports = mongoose.model("File", fileSchema);

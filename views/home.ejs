@@ -1,32 +1,183 @@
-<% include ./header.ejs%>
-<div class="firstnick">
-    <div class="container">
-        <header class="jumbotron">
-            <div class="conatiner">
-                <h1>Welcome to our file sharing site</h1>
-                <p>Browse as many files as you can and also share with everyone</p>
-                <p>
-                    <a href="/upload" class="btn btn-primary btn-large">Upload new files</a>
-                </p>
-            </div>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DeDupe | Home</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-            <%if(logged) {%>
-                <% files.forEach(function (file) {%>
-                    <% if(file.user.username == currentUser.username){%>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="/files/<%= file._id %>">
-                            <div class="thumbnail">
-                                <h4><%= file.filename%></h4>
-                                <p class="username"><i>by</i> <%= file.user.username%></p>
-                            </div>
-                        </a>
-                    </div>
-                    <%}%>
-                <% }); %>
-            <%}%>
+
+<body id="home">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand active">DeDupe</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                    <a href="/" class="nav-link active">Home</a>
+                </li>
+                <!--<li class="nav-item px-3">-->
+                <!--<a href="#explore-head-section" class="nav-link">Explore</a>-->
+                <!--</li>-->
+                <li class="nav-item ">
+                    <a href="/upload" class="nav-link">Upload</a>
+                </li>
+
+                <% if(!currentUser){ %>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle"></i> Sign In</a>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle-o"></i> Sign Up</a>
+                </li>
+                <%} else {%>
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa fa-user-circle-o"></i> <%= currentUser.username%></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link"><i class="fa fa-user-times"></i> Sign Out</a>
+                </li>
+                <%}%>
+            </ul>
         </div>
     </div>
-</div>
+</nav>
+<!-- Home -->
 
+
+<header id="home-section">
+    <div class="dark-overlay">
+        <div class="home-inner">
+            <div class="container">
+                <div class="firstnick-home">
+                    <% if(error && error.length>0 ){%>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error%>
+                    </div>
+                    <%}else if(success && success.length>0){%>
+                    <div class="alert alert-success" role="alert">
+                        <%= success%>
+                    </div>
+                    <%}%>
+                </div>
+                <section class="jumbotron text-center">
+                    <div class="container">
+                        <h1 class="jumbotron-heading jumbhead">Welcome to DeDupe</h1>
+                        <p class="lead text-muted">Upload your files here! We use deduplication techniques to store your files in our site that significantly reduces the storage space in our server.</p>
+                        <p>
+                            <a href="/upload" class="btn btn-primary my-2">Upload New File</a>
+                        </p>
+                    </div>
+                </section>
+                </div>
+            </div>
+
+
+
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <h3 class="text-dark h3inhome">All your Uploaded files are listed below</h3>
+
+                <div class="row">
+                    <%if(logged) {%>
+                    <% files.forEach(function (file) {%>
+                    <% if(file.user.username == currentUser.username){%>
+                    <div class="col-md-4 col-sm-6" style="padding-bottom: 20px !important;">
+                        <div class="card mb-2 box-shadow">
+                            <div class="card-img-top " style="height: 100px; width: 100%; display: block; background: #55595C" >
+                                <%
+                                    var fileArray = file.filename.split(".");
+                                    var extension = fileArray[fileArray.length-1]
+                                    switch (extension) {
+                                        case "jpg": case "bmp": case "jpeg": case "gif": case "pcd": case "ico": case "png":
+                                        result = "fa-picture-o";
+                                        break;
+                                        case "txt":  case "rtf": case "tex":
+                                        result = "fa-file-text";
+                                        break;
+                                        case "doc": case "docx":
+                                           result = "fa-file-word-o";
+                                           break;
+                                        case "pdf":
+                                           result = "fa-file-pdf-o";
+                                           break;
+                                        case "mp3": case "wav": case "wma": case "aac":
+                                        result = "fa-volume-up";
+                                        break;
+                                        case "mp4": case "3gp": case "mkv": case "flv": case "avi": case "wmv": case "webm":
+                                        result = "fa-video-camera";
+                                        break;
+                                        case "zip": case "rar": case "7z": case "z":
+                                        result = "fa-file-archive-o";
+                                        break;
+                                        case "css": case "html": case "js": case "ejs": case "java":
+                                        result = "fa-code";
+                                        break;
+                                        default:
+                                            result = "fa-file";
+                                            break;
+                                    } %>
+
+                                <div class="text-center" ><br><a href="/files/<%= file._id %>/view"><i class="fa <%=result%> appleisgood text-light" aria-hidden="true" ></i> <span class="text-md-center span-name text-light"><%= file.filename%></span></a> </div>
+                            </div>
+                            <div class="card-body " style="min-height: 111px; ">
+                                <p class="card-text text-dark text"  >
+                                    <% if(file.description == null || file.description === ""){%>
+                                        <span class="text-muted">No desc</span>
+                                    <%} else {%>
+                                    <%= file.description%>
+                                    <%}%>
+                                </p>
+
+                                <div class="d-flex justify-content-between ">
+                                    <div class="btn-group ">
+                                        <a  href="/files/<%= file._id %>/download"><button type="button" class="btn btn-sm btn-info">Download</button></a>
+                                        <form action="/delete" method="post">
+                                            <input type="hidden" id="deleteFile" name="deleteFile" value=<%= file._id%> >
+                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                    <% if(file.date == null || file.date === ""){%>
+                                    <small class="text-muted text-right " style="align-self: right; margin-top: 5px">No date</small>
+                                    <%} else {%>
+                                    <small class="text-muted text-right"  style="align-self: right; margin-top: 5px"><%=file.date;%></small>
+                                    <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                    <% }); %>
+                    <%}%>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/navbar-fixed.js"></script>
+
+
+</body>
+</html>
