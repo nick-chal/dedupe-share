@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DeDupe | Admin</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body id="home">
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand active">DeDupe</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Home</a>
+                </li>
+                <!--<li class="nav-item px-3">-->
+                <!--<a href="#explore-head-section" class="nav-link">Explore</a>-->
+                <!--</li>-->
+
+
+                <% if(!currentUser){ %>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle"></i> Sign In</a>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle-o"></i> Sign Up</a>
+                </li>
+                <%} else {%>
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa fa-user-circle-o"></i> <%= currentUser.username%></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link"><i class="fa fa-user-times"></i> Sign Out</a>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Home -->
+
+
+<header id="home-section">
+    <div class="dark-overlay">
+        <div class="home-inner">
+            <div class="container">
+                <div class="firstnick-home">
+                    <% if(error && error.length>0 ){%>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error%>
+                    </div>
+                    <%}else if(success && success.length>0){%>
+                    <div class="alert alert-success" role="alert">
+                        <%= success%> You are logged in as admin
+                    </div>
+                    <%}%>
+                </div>
+                <section class="jumbotron text-left">
+                    <div class="container">
+                        <h1 class="jumbotron-heading jumbhead">This is the admin page! </h1>
+                        <p class="lead text-muted">You can view thall the users, the total files uploaded, the size of uploaded files as well as the size of all the chunks of files in the server.</p>
+                        <div>
+                            <ul class="lead text-dark">
+                                <li>The total number of current users is <%= users.length-1%></li>
+                                <li><%= files.length%> files has been upload in the server</li>
+                                <li>The total size of these <%= files.length%> files is <%= fileSize%> bytes</li>
+                                <li>The total size of all the chunks of these files in the server is <%= chunkSize%> bytes</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 class="lead display-4 text-dark">The list of all the users:</h2>
+                            <ul class="list-group-flush" style="width: 550px!important; padding-left: 0; color: #55595C;">
+                                <table class="table table-dark">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" style="padding-right: 170px">Username</th>
+                                        <th scope="col" >No. of Files</th>
+                                        <th style="text-align-last: right !important;" scope="col">Size in bytes</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% users.forEach(function (user) {%>
+                                    <%if(user.username !== currentUser.username){ %>
+                                    <tr>
+                                        <td><%= user.username%></td>
+                                        <td style="text-align-last: right !important;"><span style="margin-right: 15px;" class="badge badge-primary badge-pill"><%= user.file.count%> files </span></td>
+                                        <td style="text-align-last: right !important;"><span class="text-muted">    <%= user.file.size%> bytes</span></td>
+                                    </tr>
+                                    <%}%>
+                                    <%})%>
+                                    </tbody>
+                                </table>
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/navbar-fixed.js"></script>
+
+
+</body>
+</html>

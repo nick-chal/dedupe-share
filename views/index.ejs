@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DeDupe | Home</title>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body id="home">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+<div class="container">
+  <a href="/" class="navbar-brand active">DeDupe</a>
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="/" class="nav-link active">Home</a>
+      </li>
+      <!--<li class="nav-item px-3">-->
+        <!--<a href="#explore-head-section" class="nav-link">Explore</a>-->
+      <!--</li>-->
+
+
+        <% if(!currentUser){ %>
+      <li class="nav-item ">
+        <a href="/login" class="nav-link"><i class="fa fa-user-circle"></i> Sign In</a>
+      <li class="nav-item ">
+        <a href="/register" class="nav-link"><i class="fa fa-user-circle-o"></i> Sign Up</a>
+      </li>
+        <%} else {%>
+      <li class="nav-item">
+        <a href="#" class="nav-link"><i class="fa fa-user-circle-o"></i><%= currentUser.username%></a>
+      </li>
+      <li class="nav-item">
+        <a href="/logout" class="nav-link"><i class="fa fa-user-times"></i>Sign Out</a>
+      </li>
+        <%}%>
+    </ul>
+  </div>
+</div>
+</nav>
+<!-- Home -->
+
+<header id="home-section">
+  <div class="dark-overlay">
+    <div class="home-inner">
+      <div class="container">
+        <div class="firstnick-home">
+            <% if(error && error.length>0 ){%>
+          <div class="alert alert-danger" role="alert">
+              <%= error%>
+          </div>
+            <%}else if(success && success.length>0){%>
+          <div class="alert alert-success" role="alert">
+              <%= success%>
+          </div>
+            <%}%>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 d-none d-lg-block">
+            <h1 class="display-4">
+              <strong>Welcome to DeDupe</strong><br>
+              Backup your files and download it efficiently!!
+            </h1>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Quick file upload
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Protect your precious files from accidents.
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Use of deduplication for minimum storage usage
+              </div>
+            </div>
+          </div>
+          <!--<div class="col-lg-4">-->
+              <!--<div class="card bg-primary text-center card-form">-->
+                <!--<div class="card-body">-->
+                  <!--<h3>Sign Up Today</h3>-->
+                  <!--<p>Please fill out this form to register</p>-->
+                  <!--<form >-->
+                    <!--<div class="form-group">-->
+                      <!--<input type="text" class="form-control form-control-lg" placeholder="Username">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input type="password" class="form-control form-control-lg" placeholder="Password">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                      <!--<input type="password" class="form-control form-control-lg" placeholder="Confirm Password">-->
+                    <!--</div>-->
+                    <!--<input type="submit" class="btn btn-outline-light btn-block">-->
+                  <!--</form>-->
+                <!--</div>-->
+              <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+
+<!-- Explore section -->
+<section id="explore-section" class="bg-light text-muted py-5">
+  <div class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="img/share.jpg" alt="sharing" class="img-fluid mb-3 rounded-circle">
+        </div>
+        <div class="col-md-6">
+          <h3>Features</h3>
+          <p>DeDupe is based on data deduplication and provides following features</p>
+          <div class="d-flex flex-row">
+            <div class="p-4 align-self-start">
+              <i class="fa fa-check"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              Storage of files based on variable-sized chunking algorithm.
+            </div>
+          </div>
+          <div class="d-flex flex-row">
+            <div class="p-4 align-self-start">
+              <i class="fa fa-check"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              Website has been sanitized to prevent any intrusion.
+            </div>
+          </div><div class="d-flex flex-row">
+            <div class="p-4 align-self-start">
+              <i class="fa fa-check"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              Download files without any corruption.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/navbar-fixed.js"></script>
+
+</body>
+</html>

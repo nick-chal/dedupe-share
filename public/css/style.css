@@ -1,0 +1,104 @@
+
+body {
+  background: #333;
+  color: #fff; }
+
+.firstnick{
+    padding: 0 50px ;
+}
+.firstnick-home{
+    padding: 0;
+}
+
+.navbar {
+  border-bottom: #008ed6 3px solid;
+  opacity: 1; }
+
+#home-section{
+    /*background:url('../img/soc.jpg') no-repeat;*/
+    background-size:cover;
+    background-attachment:fixed;
+    min-height:700px;}
+
+#home-section .home-inner{
+      padding-top:150px;
+    }
+
+#home-section .dark-overlay{
+      background-color:rgba(0,0,0,0.7);
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      min-height:700px;
+    }
+
+#home-section .card-form{
+         opacity:0.8;
+       }
+
+#home-section .fa{
+  color: #008ed6;
+  background:#fff;
+  padding: 4px;
+  border-radius: 5px;
+  font-size:30px;
+
+}
+#paragraph1{
+  padding: 0;
+  margin-bottom: 0;
+}
+
+#explore-section .fa{
+  color: #fff;
+background: #333;
+padding: 4px;
+border-radius: 5px;
+font-size: 30px;
+}
+
+#create-section .fa{
+  color: #008ed6;
+  background:#fff;
+  padding: 4px;
+  border-radius: 5px;
+  font-size:30px;
+}
+#main-footer .fa{
+  font-size: 25px;
+}
+
+#details .card:hover{
+  background: #2980B9;
+  color:white;
+}
+#login{
+  padding-top: 100px;
+}
+.heada{
+  padding-top: 75px;
+}
+
+.jumbhead{
+    color : #1d2124 !important;
+}
+
+.h3inhome{
+    padding-bottom: 50px;
+}
+
+.appleisgood:before{
+    padding: 0px;
+    background: #55595C;
+}
+.appleisgood{
+    background: #55595C;
+    padding: 0 !important;
+    font-size: 20px !important;
+}
+
+.span-name{
+    font-size: 25px !important;
+}
+

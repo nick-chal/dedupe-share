@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DeDupe | <%= file.filename%></title>
+    <base href="/">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body id="home">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand active">DeDupe</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Home</a>
+                </li>
+                <!--<li class="nav-item px-3">-->
+                <!--<a href="#explore-head-section" class="nav-link">Explore</a>-->
+                <!--</li>-->
+                <li class="nav-item ">
+                    <a href="/upload" class="nav-link">Upload</a>
+                </li>
+
+                <% if(!currentUser){ %>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle"></i> Sign In</a>
+                <li class="nav-item ">
+                    <a href="/login" class="nav-link"><i class="fa fa-user-circle-o"></i> Sign Up</a>
+                </li>
+                <%} else {%>
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa fa-user-circle-o"></i><%= currentUser.username%></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link"><i class="fa fa-user-times"></i>Sign Out</a>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Home -->
+
+
+<header id="home-section">
+    <div class="dark-overlay">
+        <div class="home-inner">
+            <div class="container">
+                <div class="firstnick-home">
+                    <% if(error && error.length>0 ){%>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error%>
+                    </div>
+                    <%}else if(success && success.length>0){%>
+                    <div class="alert alert-success" role="alert">
+                        <%= success%>
+                    </div>
+                    <%}%>
+                </div>
+                <section class="jumbotron text-center">
+                    <div class="container">
+                        <h1 class="jumbotron-heading jumbhead"><%= file.filename%> </h1>
+                        <p class="lead text-muted text-center">(<%= file.size%> bytes) uploaded in <%=file.date%></p>
+                        <br>
+                        <p class="lead text-dark text-center">The are total <%= (file.hashArray.length) %> chunks of this file stored in server.</p>
+                        <ul class="list-group list-group-flush align-self-center" style="width: fit-content; margin: auto;">
+                            <%file.hashArray.forEach(function (hash){%>
+                                <li class="list-group-item text-dark text-center" style="font-family: Consolas"><%=hash%></li>
+                            <%})%>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/navbar-fixed.js"></script>
+
+
+</body>
+</html>
